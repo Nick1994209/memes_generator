@@ -6,6 +6,7 @@ echo "Testing meme generation with different modes..."
 
 # Set data directory
 export DATA_DIR=./data
+export CONTAINER_JOB_NAME=generate-meme-job
 
 # Test 1: Default mode (synchronous)
 echo "Test 1: Default mode (synchronous)"

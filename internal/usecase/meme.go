@@ -50,7 +50,7 @@ func (uc *MemeUsecase) CreateMeme(template, textTop, textBottom string) (*domain
 		go func() {
 			jobService := service.NewCloudRuJobService()
 			memePath := filepath.Join(config.GetMemesDir(), meme.ID)
-			if err := jobService.ExecuteJob("generate-meme-job", memePath); err != nil {
+			if err := jobService.ExecuteJob(config.GetContainerJobName(), memePath); err != nil {
 				log.Printf("Failed to execute Container App Job: %v", err)
 			}
 		}()
