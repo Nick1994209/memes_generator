@@ -28,14 +28,41 @@ function App() {
 
 function MemeGallery() {
   const [memes, setMemes] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // Fetch memes from backend
     fetch('/api/memes')
-      .then(response => response.json())
-      .then(data => setMemes(data))
-      .catch(error => console.error('Error fetching memes:', error));
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Ensure we always have an array
+        if (Array.isArray(data)) {
+          setMemes(data);
+        } else {
+          setMemes([]);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching memes:', error);
+        setError('Failed to load memes');
+        setMemes([]); // Set to empty array on error
+      });
   }, []);
+
+  if (error) {
+    return (
+      <div>
+        <h2>Meme Gallery</h2>
+        <p>Error: {error}</p>
+        <p><Link to="/create">Create your first meme!</Link></p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -138,14 +165,31 @@ function CreateMeme() {
   const [textBottom, setTextBottom] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch templates from backend
     fetch('/api/templates')
-      .then(response => response.json())
-      .then(data => setTemplates(data))
-      .catch(error => console.error('Error fetching templates:', error));
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Ensure we always have an array
+        if (Array.isArray(data)) {
+          setTemplates(data);
+        } else {
+          setTemplates([]);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching templates:', error);
+        setError('Failed to load templates');
+        setTemplates([]); // Set to empty array on error
+      });
   }, []);
 
   const handleSubmit = async (e) => {
@@ -185,6 +229,16 @@ function CreateMeme() {
       setLoading(false);
     }
   };
+
+  if (error) {
+    return (
+      <div className="create-meme-container">
+        <h2>Create New Meme</h2>
+        <p>Error: {error}</p>
+        <p><Link to="/templates/create">Create a template</Link></p>
+      </div>
+    );
+  }
 
   return (
     <div className="create-meme-container">
@@ -250,14 +304,41 @@ function CreateMeme() {
 
 function TemplateGallery() {
   const [templates, setTemplates] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // Fetch templates from backend
     fetch('/api/templates')
-      .then(response => response.json())
-      .then(data => setTemplates(data))
-      .catch(error => console.error('Error fetching templates:', error));
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Ensure we always have an array
+        if (Array.isArray(data)) {
+          setTemplates(data);
+        } else {
+          setTemplates([]);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching templates:', error);
+        setError('Failed to load templates');
+        setTemplates([]); // Set to empty array on error
+      });
   }, []);
+
+  if (error) {
+    return (
+      <div>
+        <h2>Template Gallery</h2>
+        <p>Error: {error}</p>
+        <p><Link to="/templates/create">Create your first template!</Link></p>
+      </div>
+    );
+  }
 
   return (
     <div>

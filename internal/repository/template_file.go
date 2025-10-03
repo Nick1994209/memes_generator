@@ -107,6 +107,11 @@ func (r *TemplateFileRepository) List() ([]*domain.Template, error) {
 		templates = append(templates, template)
 	}
 
+	// Ensure we always return an array, even if empty
+	if templates == nil {
+		templates = []*domain.Template{}
+	}
+
 	return templates, nil
 }
 

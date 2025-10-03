@@ -6,12 +6,12 @@ import (
 
 // Environment variables
 const (
-	GenerateMemeEnv     = "GENERATE_MEME"
-	ProjectIDEnv        = "PROJECT_ID"
+	GenerateMemeEnv     = "GENERATE_MEME_MODE"
+	ProjectIDEnv        = "CLOUDRU_PROJECT_ID"
 	KeyIDEnv            = "CLOUDRU_KEY_ID"
 	KeySecretEnv        = "CLOUDRU_KEY_SECRET"
+	ContainerJobNameEnv = "CLOUDRU_GENERATE_MEME_JOB"
 	DataDirEnv          = "DATA_DIR"
-	ContainerJobNameEnv = "CONTAINER_JOB_NAME"
 )
 
 // GetGenerateMemeMode returns the meme generation mode based on environment variable

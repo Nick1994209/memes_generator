@@ -110,6 +110,11 @@ func (h *MemeHandler) ListMemes(c *gin.Context) {
 		return
 	}
 
+	// Ensure we always return an array, even if empty
+	if memes == nil {
+		memes = []*domain.Meme{}
+	}
+
 	var response []MemeResponse
 	for _, meme := range memes {
 		response = append(response, MemeResponse{
@@ -172,6 +177,11 @@ func (h *MemeHandler) ListTemplates(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
+	}
+
+	// Ensure we always return an array, even if empty
+	if templates == nil {
+		templates = []*domain.Template{}
 	}
 
 	var response []TemplateResponse

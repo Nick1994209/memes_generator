@@ -11,5 +11,6 @@ services:
       - PORT=8080
       - WEB_ROOT=./web/build
       - DATA_DIR=./data
-      - GENERATE_MEME=default
-      - CONTAINER_JOB_NAME=generate-meme-job
+      - GENERATE_MEME_MODE=default
+      - CLOUDRU_GENERATE_MEME_JOB_NAME=generate-meme-job
+      - CLOUDRU_PROJECT_ID=

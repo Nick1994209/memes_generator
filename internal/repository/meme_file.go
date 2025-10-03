@@ -111,6 +111,11 @@ func (r *MemeFileRepository) List() ([]*domain.Meme, error) {
 		memes = append(memes, meme)
 	}
 
+	// Ensure we always return an array, even if empty
+	if memes == nil {
+		memes = []*domain.Meme{}
+	}
+
 	return memes, nil
 }
 

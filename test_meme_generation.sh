@@ -6,11 +6,11 @@ echo "Testing meme generation with different modes..."
 
 # Set data directory
 export DATA_DIR=./data
-export CONTAINER_JOB_NAME=generate-meme-job
+export CLOUDRU_GENERATE_MEME_JOB_NAME=generate-meme-job
 
 # Test 1: Default mode (synchronous)
 echo "Test 1: Default mode (synchronous)"
-unset GENERATE_MEME
+unset GENERATE_MEME_MODE
 go run cmd/web/main.go &
 PID=$!
 sleep 2
@@ -26,7 +26,7 @@ echo "Test 1 completed"
 
 # Test 2: Background mode
 echo "Test 2: Background mode"
-export GENERATE_MEME=background
+export GENERATE_MEME_MODE=background
 go run cmd/web/main.go &
 PID=$!
 sleep 2
@@ -39,8 +39,8 @@ echo "Test 2 completed"
 
 # Test 3: Container App Job mode
 echo "Test 3: Container App Job mode"
-export GENERATE_MEME=containerappjob
-export PROJECT_ID=your-project-id
+export GENERATE_MEME_MODE=containerappjob
+export CLOUDRU_PROJECT_ID=your-project-id
 export CLOUDRU_KEY_ID=your-key-id
 export CLOUDRU_KEY_SECRET=your-key-secret
 go run cmd/web/main.go &
