@@ -6,7 +6,10 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./data:/root/data
+      - ./data:/app/data
     environment:
       - PORT=8080
       - WEB_ROOT=./web/build
+      - DATA_DIR=./data
+      - GENERATE_MEME=default
+      - CONTAINER_JOB_NAME=generate-meme-job
