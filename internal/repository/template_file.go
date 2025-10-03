@@ -8,11 +8,12 @@ import (
 	"path/filepath"
 	"strings"
 
+	"memes-generator/internal/config"
 	"memes-generator/internal/domain"
 )
 
 const (
-	templatesDir = "./data/templates"
+	templatesDir = ""
 )
 
 // TemplateFileRepository implements domain.TemplateRepository using file system
@@ -23,7 +24,7 @@ type TemplateFileRepository struct {
 // NewTemplateFileRepository creates a new file-based template repository
 func NewTemplateFileRepository() *TemplateFileRepository {
 	return &TemplateFileRepository{
-		dataPath: templatesDir,
+		dataPath: config.GetTemplatesDir(),
 	}
 }
 

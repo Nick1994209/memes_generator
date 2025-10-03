@@ -22,8 +22,8 @@ RUN go build -o generate-meme cmd/generate/main.go
 # Final stage
 FROM alpine:latest
 
-# Install ca-certificates for HTTPS requests
-RUN apk --no-cache add ca-certificates
+# Install ca-certificates and required packages for user management
+RUN apk --no-cache add ca-certificates shadow
 
 WORKDIR /app
 
@@ -35,7 +35,16 @@ COPY --from=backend-build /app/memes-generator .
 COPY --from=backend-build /app/generate-meme .
 
 # Create data directory
-RUN mkdir -p ./data/memes
+RUN mkdir -p ./data/memes ./data/templates
+
+# Non-root user stage
+# Create user and set ownership
+RUN groupadd -g 1000 appuser && \
+    useradd -u 1000 -g appuser -s /bin/bash -m appuser && \
+    chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
 
 # Expose port
 EXPOSE 8080

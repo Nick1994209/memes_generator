@@ -7,11 +7,12 @@ import (
 	"path/filepath"
 	"time"
 
+	"memes-generator/internal/config"
 	"memes-generator/internal/domain"
 )
 
 const (
-	dataDir = "./data/memes"
+	dataDir = ""
 )
 
 // MemeFileRepository implements domain.MemeRepository using file system
@@ -22,7 +23,7 @@ type MemeFileRepository struct {
 // NewMemeFileRepository creates a new file-based meme repository
 func NewMemeFileRepository() *MemeFileRepository {
 	return &MemeFileRepository{
-		dataPath: dataDir,
+		dataPath: config.GetMemesDir(),
 	}
 }
 

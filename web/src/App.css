@@ -167,7 +167,7 @@ button:disabled {
   text-align: left;
   border-right: 1px solid #eee;
   padding-right: 20px;
-  max-width: 300px;
+  max-width: 500px;
 }
 
 .template-selector h3 {

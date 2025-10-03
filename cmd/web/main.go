@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"memes-generator/internal/config"
 	"memes-generator/internal/delivery/http"
 	"memes-generator/internal/repository"
 	"memes-generator/internal/usecase"
@@ -31,12 +32,12 @@ func main() {
 	}
 
 	// Ensure data directories exist
-	dataDir := "./data/memes"
+	dataDir := config.GetDataDir()
 	if err := os.MkdirAll(dataDir, 0755); err != nil {
 		log.Fatalf("Failed to create data directory: %v", err)
 	}
 
-	templatesDir := "./data/templates"
+	templatesDir := config.GetTemplatesDir()
 	if err := os.MkdirAll(templatesDir, 0755); err != nil {
 		log.Fatalf("Failed to create templates directory: %v", err)
 	}

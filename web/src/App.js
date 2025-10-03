@@ -294,6 +294,7 @@ function CreateTemplate() {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleCreateTemplate = async (e) => {
     e.preventDefault();
@@ -333,10 +334,8 @@ function CreateTemplate() {
         }
       }
 
-      setMessage(`Template "${template.name}" created successfully!`);
-      // Reset form
-      setName('');
-      setImage(null);
+      // Navigate to the templates list
+      navigate('/templates');
     } catch (error) {
       setMessage(`Error: ${error.message}`);
     } finally {
